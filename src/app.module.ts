@@ -4,6 +4,11 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './typeorm/entities/User';
 import { UsersModule } from './users/users.module';
+import { EthersService } from './ethers/ethers.service';
+import { EthersController } from './ethers/ethers.controller';
+import { EthersModule } from './ethers/ethers.module';
+import { ConfigModule } from '@nestjs/config';
+import { ScheduleModule } from '@nestjs/schedule';
 
 @Module({
   imports: [
@@ -12,14 +17,17 @@ import { UsersModule } from './users/users.module';
       host: 'localhost',
       port: 3306,
       username: 'root',
-      password: '1234',
+      password: '123456',
       database: 'nestjs_mysql_demo',
       entities: [User],
       synchronize: true,
     }),
+    ScheduleModule.forRoot(),
     UsersModule,
+    EthersModule,
+    ConfigModule.forRoot(),
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [AppController, EthersController],
+  providers: [AppService, EthersService],
 })
 export class AppModule {}
