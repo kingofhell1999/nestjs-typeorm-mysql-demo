@@ -9,6 +9,7 @@ import { EthersController } from './ethers/ethers.controller';
 import { EthersModule } from './ethers/ethers.module';
 import { ConfigModule } from '@nestjs/config';
 import { ScheduleModule } from '@nestjs/schedule';
+import { Transaction } from './typeorm/entities/Transaction';
 
 @Module({
   imports: [
@@ -19,9 +20,10 @@ import { ScheduleModule } from '@nestjs/schedule';
       username: 'root',
       password: '123456',
       database: 'nestjs_mysql_demo',
-      entities: [User],
+      entities: [User, Transaction],
       synchronize: true,
     }),
+    TypeOrmModule.forFeature([Transaction]),
     ScheduleModule.forRoot(),
     UsersModule,
     EthersModule,

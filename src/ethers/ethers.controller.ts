@@ -4,6 +4,7 @@ import { EthersService } from './ethers.service';
 @Controller('ethers')
 export class EthersController {
   startBlock = 9057312;
+
   constructor(private readonly ethersService: EthersService) {}
 
   @Get('transactions')
@@ -22,6 +23,6 @@ export class EthersController {
 
   @Get('token-price')
   async getTokenPrice() {
-    return this.ethersService.getTokenPrice();
+    // return this.ethersService.getTokenPrice();
   }
 }
